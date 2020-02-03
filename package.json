@@ -5,6 +5,7 @@
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "dependencies": {
+    "@blueprintjs/core": "^3.23.1",
     "@emotion/core": "^10.0.22",
     "@emotion/styled": "^10.0.23",
     "@govtechsg/decentralized-renderer-react-components": "^2.0.1",
