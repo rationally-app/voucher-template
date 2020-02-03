@@ -38,6 +38,9 @@ export const Voucher = ({
           </div>
         </div>
         <div className="col-4 p-2">
+          <div>
+            <strong>S/N: {serialNo}</strong>
+          </div>
           <div className="p-2">
             <div className="text-center">
               <QRCode
