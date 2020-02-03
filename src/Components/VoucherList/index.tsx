@@ -60,7 +60,7 @@ export const VoucherList = () => {
   return (
     <div className="container">
       {keys.map((key, index) => (
-        <Voucher serialNo={startingSerial + index} apiKey={key} breakAfter={index % 5 == 4} />
+        <Voucher key={index} serialNo={startingSerial + index} apiKey={key} breakAfter={index % 5 == 4} />
       ))}
     </div>
   );
