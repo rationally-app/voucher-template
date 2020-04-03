@@ -13,7 +13,7 @@ export const Voucher = ({
   serialNo: number | string;
   apiKey: string;
   breakAfter?: boolean;
-}) => {
+}): React.ReactElement => {
   const qrCode = JSON.stringify({ key: apiKey, endpoint });
   return (
     <>

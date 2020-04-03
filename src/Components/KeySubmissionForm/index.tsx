@@ -7,7 +7,7 @@ export const KeySubmissionForm = ({
   onKeySubmission
 }: {
   onKeySubmission: (keys: string[], endpoint: string) => void;
-}) => {
+}): React.ReactElement => {
   const [rawInput, setRawInput] = useState("");
   const [endpoint, setEndpoint] = useState("");
   const [editableEndpoint, setEditableEndpoint] = useState(true);
@@ -23,12 +23,12 @@ export const KeySubmissionForm = ({
     }
   }, [endpointFromUrl]);
 
-  const validateInput = (input: string) => {
+  const validateInput = (input: string): void => {
     const keysFound = input.match(/[^\r\n]+/g);
     if (keysFound) setKeys(keysFound);
   };
 
-  const onRawInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const onRawInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>): void => {
     validateInput(event.target.value);
     setRawInput(event.target.value);
   };
@@ -45,7 +45,7 @@ export const KeySubmissionForm = ({
           value={endpoint}
           onChange={e => setEndpoint(e.target.value)}
           style={{ fontFamily: "monospace" }}
-        ></input>
+        />
       </div>
       <div className="mt-3">Enter the list of keys below (one key per line):</div>
       <div className="mt-2 mb-2">

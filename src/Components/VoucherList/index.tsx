@@ -4,11 +4,11 @@ import { KeySubmissionForm } from "../KeySubmissionForm";
 
 const startingSerial = 1;
 
-export const VoucherList = () => {
+export const VoucherList = (): React.ReactElement => {
   const [keys, setKeys] = useState<string[]>([]);
   const [endpoint, setEndpoint] = useState("");
 
-  const onKeySubmission = (submittedKeys: string[], submittedEndpoint: string) => {
+  const onKeySubmission = (submittedKeys: string[], submittedEndpoint: string): void => {
     setKeys(submittedKeys);
     setEndpoint(submittedEndpoint);
   };
