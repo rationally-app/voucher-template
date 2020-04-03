@@ -4,14 +4,17 @@ import { QRCode } from "react-qr-svg";
 const BACKGROUND_COLOR = "#F5F8FA";
 
 export const Voucher = ({
+  endpoint,
   serialNo,
   apiKey,
   breakAfter
 }: {
+  endpoint: string;
   serialNo: number | string;
   apiKey: string;
   breakAfter?: boolean;
-}) => {
+}): React.ReactElement => {
+  const qrCode = JSON.stringify({ key: apiKey, endpoint });
   return (
     <>
       <div className="row" style={{ backgroundColor: BACKGROUND_COLOR, marginTop: 10 }}>
@@ -33,7 +36,8 @@ export const Voucher = ({
               <hr />
             </div>
           </div>
-          <div className="d-flex justify-content-between align-items-end">
+          <div className="d-flex justify-content-between flex-column">
+            <div className="text-dark">{endpoint}</div>
             <div className="text-dark">{apiKey}</div>
           </div>
         </div>
@@ -48,7 +52,7 @@ export const Voucher = ({
                 fgColor="#000000"
                 level="H"
                 style={{ width: "100%", maxWidth: 150 }}
-                value={apiKey}
+                value={qrCode}
               />
             </div>
           </div>
