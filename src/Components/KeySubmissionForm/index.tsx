@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button, TextArea } from "@blueprintjs/core";
 
 const BACKGROUND_COLOR = "#F5F8FA";
+const DATE_OPTS = {year: 'numeric', month:'short', day:'numeric', hour: 'numeric', minute: 'numeric', hour12: false};
 
 export const KeySubmissionForm = ({
   onKeySubmission
@@ -65,8 +66,8 @@ export const KeySubmissionForm = ({
       </div>
       <div className="mt-3">Key Validity Period (JS UTC Timestamps)</div>
       <div>
-          <input className="m-1" placeholder="From.." value={validFrom} onBlur={e => { setValidFrom((new Date(Number(e.target.value))).toLocaleString()) }} onChange={e => setValidFrom(e.target.value)} />
-          <input className="m-1" placeholder="Till.." value={validTill} onBlur={e => { setValidTill((new Date(Number(e.target.value))).toLocaleString()) }} onChange={e => setValidTill(e.target.value)} />
+          <input className="m-1" placeholder="From.." value={validFrom} onBlur={e => { setValidFrom((new Date(Number(e.target.value))).toLocaleString('en-SG', DATE_OPTS)) }} onChange={e => setValidFrom(e.target.value)} />
+          <input className="m-1" placeholder="Till.." value={validTill} onBlur={e => { setValidTill((new Date(Number(e.target.value))).toLocaleString('en-SG', DATE_OPTS)) }} onChange={e => setValidTill(e.target.value)} />
       </div>
       <div className="d-flex flex-column align-items-end">
         <Button
