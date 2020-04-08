@@ -7,12 +7,16 @@ export const Voucher = ({
   endpoint,
   serialNo,
   apiKey,
-  breakAfter
+  breakAfter,
+  validFrom,
+  validTill
 }: {
   endpoint: string;
   serialNo: number | string;
   apiKey: string;
   breakAfter?: boolean;
+  validFrom: string;
+  validTill: string;
 }): React.ReactElement => {
   const qrCode = JSON.stringify({ key: apiKey, endpoint });
   return (
@@ -23,8 +27,14 @@ export const Voucher = ({
           style={{ borderRight: "2px dashed grey" }}
         >
           <div>
-            <div>
+            <div className="row">
+            <div className="col-4">
               <strong>S/N: {serialNo}</strong>
+            </div>
+            <div className="col-8 text-right">
+              <div className="">Valid from: {validFrom} </div>
+              <div className="">Valid till: {validTill}</div>
+            </div>
             </div>
             <h5 className="text-dark mt-3 mb-2">Issuance Details</h5>
             <div>

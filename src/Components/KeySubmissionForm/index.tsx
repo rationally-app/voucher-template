@@ -6,10 +6,12 @@ const BACKGROUND_COLOR = "#F5F8FA";
 export const KeySubmissionForm = ({
   onKeySubmission
 }: {
-  onKeySubmission: (keys: string[], endpoint: string) => void;
+  onKeySubmission: (keys: string[], endpoint: string, validFrom: string, validTill: string) => void;
 }): React.ReactElement => {
   const [rawInput, setRawInput] = useState("");
   const [endpoint, setEndpoint] = useState("");
+  const [validFrom, setValidFrom] = useState("");
+  const [validTill, setValidTill] = useState("");
   const [editableEndpoint, setEditableEndpoint] = useState(true);
   const [keys, setKeys] = useState<string[]>([]);
 
@@ -61,6 +63,11 @@ export const KeySubmissionForm = ({
           <div>{keys.length} keys</div>
         </div>
       </div>
+      <div className="mt-3">Key Validity Period (JS UTC Timestamps)</div>
+      <div>
+          <input className="m-1" placeholder="From.." value={validFrom} onBlur={e => { setValidFrom((new Date(Number(e.target.value))).toLocaleString()) }} onChange={e => setValidFrom(e.target.value)} />
+          <input className="m-1" placeholder="Till.." value={validTill} onBlur={e => { setValidTill((new Date(Number(e.target.value))).toLocaleString()) }} onChange={e => setValidTill(e.target.value)} />
+      </div>
       <div className="d-flex flex-column align-items-end">
         <Button
           rightIcon="arrow-right"
@@ -68,7 +75,7 @@ export const KeySubmissionForm = ({
           text="Generate Printable Vouchers"
           onClick={() => {
             console.log(keys);
-            onKeySubmission(keys, endpoint);
+            onKeySubmission(keys, endpoint, validFrom, validTill);
           }}
         />
       </div>
