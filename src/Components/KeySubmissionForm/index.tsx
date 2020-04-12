@@ -2,7 +2,16 @@ import React, { useState, useEffect } from "react";
 import { Button, TextArea } from "@blueprintjs/core";
 
 const BACKGROUND_COLOR = "#F5F8FA";
-const DATE_OPTS = {year: 'numeric', month:'short', day:'numeric', hour: 'numeric', minute: 'numeric', hour12: false};
+const DATE_OPTS = {
+  year: "numeric",
+  month: "short",
+  day: "numeric",
+  hour: "numeric",
+  minute: "numeric",
+  hour12: false
+};
+
+const formatDate = (date: string | number) => new Date(Number(date)).toLocaleString("en-SG", DATE_OPTS);
 
 export const KeySubmissionForm = ({
   onKeySubmission
@@ -14,15 +23,23 @@ export const KeySubmissionForm = ({
   const [validFrom, setValidFrom] = useState("");
   const [validTill, setValidTill] = useState("");
   const [editableEndpoint, setEditableEndpoint] = useState(true);
+  const [editableValidity, setEditableValidity] = useState(true);
   const [keys, setKeys] = useState<string[]>([]);
 
   const urlParams = new URLSearchParams(window.location.search);
   const endpointFromUrl = urlParams.get("endpoint");
+  const validFromFromUrl = urlParams.get("validFrom");
+  const validTillFromUrl = urlParams.get("validTill");
 
   useEffect(() => {
     if (endpointFromUrl) {
       setEndpoint(endpointFromUrl);
       setEditableEndpoint(false);
+    }
+    if (validFromFromUrl && validTillFromUrl) {
+      setValidFrom(formatDate(validFromFromUrl));
+      setValidTill(formatDate(validTillFromUrl));
+      setEditableValidity(false);
     }
   }, [endpointFromUrl]);
 
@@ -66,8 +83,26 @@ export const KeySubmissionForm = ({
       </div>
       <div className="mt-3">Key Validity Period (JS UTC Timestamps)</div>
       <div>
-          <input className="m-1" placeholder="From.." value={validFrom} onBlur={e => { setValidFrom((new Date(Number(e.target.value))).toLocaleString('en-SG', DATE_OPTS)) }} onChange={e => setValidFrom(e.target.value)} />
-          <input className="m-1" placeholder="Till.." value={validTill} onBlur={e => { setValidTill((new Date(Number(e.target.value))).toLocaleString('en-SG', DATE_OPTS)) }} onChange={e => setValidTill(e.target.value)} />
+        <input
+          className="m-1"
+          placeholder="From.."
+          value={validFrom}
+          onBlur={e => {
+            setValidFrom(formatDate(e.target.value));
+          }}
+          onChange={e => setValidFrom(e.target.value)}
+          disabled={!editableValidity}
+        />
+        <input
+          className="m-1"
+          placeholder="Till.."
+          value={validTill}
+          onBlur={e => {
+            setValidTill(formatDate(e.target.value));
+          }}
+          onChange={e => setValidTill(e.target.value)}
+          disabled={!editableValidity}
+        />
       </div>
       <div className="d-flex flex-column align-items-end">
         <Button
