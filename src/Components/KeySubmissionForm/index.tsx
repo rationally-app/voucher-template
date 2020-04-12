@@ -55,7 +55,7 @@ export const KeySubmissionForm = ({
 
   return (
     <div className="container p-3" style={{ backgroundColor: BACKGROUND_COLOR }}>
-      <h1>Rationally Key Voucher Printer</h1>
+      <h1>SupplyAlly Key Voucher Printer</h1>
       <div>This application is used to print authentication code used by the Rationally mobile app.</div>
       <div className="mt-3">Enter the endpoint that the application is connecting to:</div>
       <div>
