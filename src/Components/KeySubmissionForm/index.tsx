@@ -16,7 +16,13 @@ const formatDate = (date: string | number) => new Date(Number(date)).toLocaleStr
 export const KeySubmissionForm = ({
   onKeySubmission
 }: {
-  onKeySubmission: (keys: string[], endpoint: string, validFrom: string, validTill: string) => void;
+  onKeySubmission: (
+    keys: string[],
+    endpoint: string,
+    validFrom: string,
+    validTill: string,
+    singleQrPerPage?: boolean
+  ) => void;
 }): React.ReactElement => {
   const [rawInput, setRawInput] = useState("");
   const [endpoint, setEndpoint] = useState("");
@@ -25,6 +31,7 @@ export const KeySubmissionForm = ({
   const [editableEndpoint, setEditableEndpoint] = useState(true);
   const [editableValidity, setEditableValidity] = useState(true);
   const [keys, setKeys] = useState<string[]>([]);
+  const [singleQrPerPage, setSingleQrPerPage] = useState(false);
 
   const urlParams = new URLSearchParams(window.location.search);
   const endpointFromUrl = urlParams.get("endpoint");
@@ -104,6 +111,13 @@ export const KeySubmissionForm = ({
           disabled={!editableValidity}
         />
       </div>
+      <div className="mt-3">Print Settings</div>
+      <div className="mt-1">
+        <label className="bp3-control bp3-checkbox bp3-align-left">
+          <input type="checkbox" checked={singleQrPerPage} onChange={e => setSingleQrPerPage(e.target.checked)} />
+          <span className="bp3-control-indicator" />1 Page per QR
+        </label>
+      </div>
       <div className="d-flex flex-column align-items-end">
         <Button
           rightIcon="arrow-right"
@@ -111,7 +125,7 @@ export const KeySubmissionForm = ({
           text="Generate Printable Vouchers"
           onClick={() => {
             console.log(keys);
-            onKeySubmission(keys, endpoint, validFrom, validTill);
+            onKeySubmission(keys, endpoint, validFrom, validTill, singleQrPerPage);
           }}
         />
       </div>
