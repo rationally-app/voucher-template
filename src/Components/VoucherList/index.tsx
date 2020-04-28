@@ -7,12 +7,20 @@ const startingSerial = 1;
 export const VoucherList = (): React.ReactElement => {
   const [keys, setKeys] = useState<string[]>([]);
   const [endpoint, setEndpoint] = useState("");
-  const [validityPeriod, setValidityPeriod] = useState<{from: string, till: string}>({from: "", till: ""})
+  const [validityPeriod, setValidityPeriod] = useState<{ from: string; till: string }>({ from: "", till: "" });
+  const [singleQrPerPage, setSingleQrPerPage] = useState(false);
 
-  const onKeySubmission = (submittedKeys: string[], submittedEndpoint: string, validFrom: string, validTill:string): void => {
+  const onKeySubmission = (
+    submittedKeys: string[],
+    submittedEndpoint: string,
+    validFrom: string,
+    validTill: string,
+    singleQrPerPage = false
+  ): void => {
     setKeys(submittedKeys);
     setEndpoint(submittedEndpoint);
-    setValidityPeriod({from: validFrom, till: validTill});
+    setValidityPeriod({ from: validFrom, till: validTill });
+    setSingleQrPerPage(singleQrPerPage);
   };
 
   const hasKeys = keys && keys.length > 0;
@@ -28,7 +36,7 @@ export const VoucherList = (): React.ReactElement => {
             apiKey={key}
             validFrom={validityPeriod.from}
             validTill={validityPeriod.till}
-            breakAfter={index % 5 == 4}
+            breakAfter={singleQrPerPage || index % 5 == 4}
           />
         ))
       ) : (
