@@ -21,6 +21,7 @@ export const KeySubmissionForm = ({
     endpoint: string,
     validFrom: string,
     validTill: string,
+    distEnv: string,
     singleQrPerPage?: boolean
   ) => void;
 }): React.ReactElement => {
