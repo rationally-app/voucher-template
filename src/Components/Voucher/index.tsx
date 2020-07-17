@@ -1,5 +1,6 @@
 import React from "react";
 import { QRCode } from "react-qr-svg";
+import { css } from "@emotion/core";
 
 const BACKGROUND_COLOR = "#F5F8FA";
 
@@ -23,7 +24,7 @@ export const Voucher = ({
   const qrCode = JSON.stringify({ key: apiKey, endpoint });
   return (
     <>
-      <div className="row" style={{ backgroundColor: BACKGROUND_COLOR, marginTop: 10 }}>
+      <div className="row" style={{ backgroundColor: BACKGROUND_COLOR, border: "1px solid lightgrey", marginTop: 10 }}>
         <div
           className="col-8 p-2 d-flex justify-content-between flex-column"
           style={{ borderRight: "2px dashed grey" }}
@@ -58,39 +59,48 @@ export const Voucher = ({
             <strong>S/N: {serialNo}</strong>
           </div>
           <div className="p-2">
-            <div className="text-center">
-              <QRCode
-                bgColor={BACKGROUND_COLOR}
-                fgColor="#000000"
-                level="H"
-                style={{ width: "100%", maxWidth: 150 }}
-                value={qrCode}
-              />
+            <div className="text-center d-flex flex-column align-items-center">
+              <div style={{ maxWidth: 200 }}>
+                <QRCode
+                  bgColor={BACKGROUND_COLOR}
+                  fgColor="#000000"
+                  level="H"
+                  style={{ width: "100%" }}
+                  value={qrCode}
+                />
+                <div
+                  className="p-2"
+                  css={css`
+                    min-height: 40px;
+                    position: relative;
+                    overflow: hidden;
+                    ::before {
+                      content: "";
+                      position: absolute;
+                      top: 0;
+                      right: 0;
+                      bottom: 0;
+                      left: 0;
+                      border-left: 100vw solid black;
+                      z-index: 0;
+                    }
+                  `}
+                >
+                  <span
+                    css={css`
+                      position: relative;
+                      font-weight: bold;
+                      font-size: 1rem;
+                      z-index: 1;
+                      color: white;
+                      -webkit-print-color-adjust: exact;
+                    `}
+                  >
+                    {distEnv}
+                  </span>
+                </div>
+              </div>
             </div>
-            <div
-              className="text-center"
-              style={{
-                width: "150px",
-                height: "40px",
-                border: "3px",
-                background: "#000000",
-                color: "#FFFFFF",
-                margin: "auto",
-                textAlign: "center"
-              }}
-            >
-              <text
-                style={{
-                  width: "150px",
-                  border: "3px",
-                  fontSize: "10px",
-                  fontWeight: "bold",
-                  color: "#FFFFFF"
-                }}
-              >
-                {distEnv}
-              </text>
-            </div>{" "}
           </div>
           <div className="m-1 p-1" style={{ fontSize: "0.6em", borderStyle: "dotted", borderWidth: 2 }}>
             This key is issued to the personnel listed below and should not be shared. If found, please destroy this

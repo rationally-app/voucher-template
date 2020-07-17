@@ -39,7 +39,7 @@ export const VoucherList = (): React.ReactElement => {
             apiKey={key}
             validFrom={validityPeriod.from}
             validTill={validityPeriod.till}
-            breakAfter={singleQrPerPage || index % 5 == 4}
+            breakAfter={singleQrPerPage || index % 3 == 2}
             distEnv={distEnv}
           />
         ))
