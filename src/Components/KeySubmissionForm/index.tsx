@@ -136,7 +136,7 @@ export const KeySubmissionForm = ({
           text="Generate Printable Vouchers"
           onClick={() => {
             console.log(keys);
-            onKeySubmission(keys, endpoint, validFrom, validTill, singleQrPerPage);
+            onKeySubmission(keys, endpoint, validFrom, validTill, distEnv, singleQrPerPage);
           }}
         />
       </div>
