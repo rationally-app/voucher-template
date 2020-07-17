@@ -28,6 +28,7 @@ export const KeySubmissionForm = ({
   const [endpoint, setEndpoint] = useState("");
   const [validFrom, setValidFrom] = useState("");
   const [validTill, setValidTill] = useState("");
+  const [distEnv, setDistEnv] = useState("");
   const [editableEndpoint, setEditableEndpoint] = useState(true);
   const [editableValidity, setEditableValidity] = useState(true);
   const [keys, setKeys] = useState<string[]>([]);
@@ -109,6 +110,15 @@ export const KeySubmissionForm = ({
           }}
           onChange={e => setValidTill(e.target.value)}
           disabled={!editableValidity}
+        />
+      </div>
+      <div className="mt-3">Environment (this will be shown on the printed voucher)</div>
+      <div>
+        <input
+          className="p-1 w-50"
+          placeholder="e.g. ABC VOUCHER CODE (TESTING ONLY)"
+          value={distEnv}
+          onChange={e => setDistEnv(e.target.value)}
         />
       </div>
       <div className="mt-3">Print Settings</div>

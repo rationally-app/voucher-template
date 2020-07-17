@@ -9,6 +9,7 @@ export const VoucherList = (): React.ReactElement => {
   const [endpoint, setEndpoint] = useState("");
   const [validityPeriod, setValidityPeriod] = useState<{ from: string; till: string }>({ from: "", till: "" });
   const [singleQrPerPage, setSingleQrPerPage] = useState(false);
+  const [distEnv] = useState("");
 
   const onKeySubmission = (
     submittedKeys: string[],
@@ -37,6 +38,7 @@ export const VoucherList = (): React.ReactElement => {
             validFrom={validityPeriod.from}
             validTill={validityPeriod.till}
             breakAfter={singleQrPerPage || index % 5 == 4}
+            distEnv={distEnv}
           />
         ))
       ) : (

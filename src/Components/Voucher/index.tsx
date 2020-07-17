@@ -9,7 +9,8 @@ export const Voucher = ({
   apiKey,
   breakAfter,
   validFrom,
-  validTill
+  validTill,
+  distEnv
 }: {
   endpoint: string;
   serialNo: number | string;
@@ -17,6 +18,7 @@ export const Voucher = ({
   breakAfter?: boolean;
   validFrom: string;
   validTill: string;
+  distEnv: string;
 }): React.ReactElement => {
   const qrCode = JSON.stringify({ key: apiKey, endpoint });
   return (
@@ -28,13 +30,13 @@ export const Voucher = ({
         >
           <div>
             <div className="row">
-            <div className="col-4">
-              <strong>S/N: {serialNo}</strong>
-            </div>
-            <div className="col-8 text-right">
-              <div className="">Valid from: {validFrom} </div>
-              <div className="">Valid till: {validTill}</div>
-            </div>
+              <div className="col-4">
+                <strong>S/N: {serialNo}</strong>
+              </div>
+              <div className="col-8 text-right">
+                <div className="">Valid from: {validFrom} </div>
+                <div className="">Valid till: {validTill}</div>
+              </div>
             </div>
             <h5 className="text-dark mt-3 mb-2">Issuance Details</h5>
             <div>
@@ -65,6 +67,30 @@ export const Voucher = ({
                 value={qrCode}
               />
             </div>
+            <div
+              className="text-center"
+              style={{
+                width: "150px",
+                height: "40px",
+                border: "3px",
+                background: "#000000",
+                color: "#FFFFFF",
+                margin: "auto",
+                textAlign: "center"
+              }}
+            >
+              <text
+                style={{
+                  width: "150px",
+                  border: "3px",
+                  fontSize: "10px",
+                  fontWeight: "bold",
+                  color: "#FFFFFF"
+                }}
+              >
+                {distEnv}
+              </text>
+            </div>{" "}
           </div>
           <div className="m-1 p-1" style={{ fontSize: "0.6em", borderStyle: "dotted", borderWidth: 2 }}>
             This key is issued to the personnel listed below and should not be shared. If found, please destroy this
