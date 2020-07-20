@@ -9,18 +9,21 @@ export const VoucherList = (): React.ReactElement => {
   const [endpoint, setEndpoint] = useState("");
   const [validityPeriod, setValidityPeriod] = useState<{ from: string; till: string }>({ from: "", till: "" });
   const [singleQrPerPage, setSingleQrPerPage] = useState(false);
+  const [distEnv, setDistEnv] = useState("");
 
   const onKeySubmission = (
     submittedKeys: string[],
     submittedEndpoint: string,
     validFrom: string,
     validTill: string,
+    distEnv: string,
     singleQrPerPage = false
   ): void => {
     setKeys(submittedKeys);
     setEndpoint(submittedEndpoint);
     setValidityPeriod({ from: validFrom, till: validTill });
     setSingleQrPerPage(singleQrPerPage);
+    setDistEnv(distEnv);
   };
 
   const hasKeys = keys && keys.length > 0;
@@ -36,7 +39,8 @@ export const VoucherList = (): React.ReactElement => {
             apiKey={key}
             validFrom={validityPeriod.from}
             validTill={validityPeriod.till}
-            breakAfter={singleQrPerPage || index % 5 == 4}
+            breakAfter={singleQrPerPage || index % 3 == 2}
+            distEnv={distEnv}
           />
         ))
       ) : (

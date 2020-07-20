@@ -21,6 +21,7 @@ export const KeySubmissionForm = ({
     endpoint: string,
     validFrom: string,
     validTill: string,
+    distEnv: string,
     singleQrPerPage?: boolean
   ) => void;
 }): React.ReactElement => {
@@ -28,6 +29,7 @@ export const KeySubmissionForm = ({
   const [endpoint, setEndpoint] = useState("");
   const [validFrom, setValidFrom] = useState("");
   const [validTill, setValidTill] = useState("");
+  const [distEnv, setDistEnv] = useState("");
   const [editableEndpoint, setEditableEndpoint] = useState(true);
   const [editableValidity, setEditableValidity] = useState(true);
   const [keys, setKeys] = useState<string[]>([]);
@@ -111,6 +113,15 @@ export const KeySubmissionForm = ({
           disabled={!editableValidity}
         />
       </div>
+      <div className="mt-3">Environment (this will be shown on the printed voucher)</div>
+      <div>
+        <input
+          className="p-1 w-50"
+          placeholder="e.g. ABC VOUCHER CODE (TESTING ONLY)"
+          value={distEnv}
+          onChange={e => setDistEnv(e.target.value)}
+        />
+      </div>
       <div className="mt-3">Print Settings</div>
       <div className="mt-1">
         <label className="bp3-control bp3-checkbox bp3-align-left">
@@ -125,7 +136,7 @@ export const KeySubmissionForm = ({
           text="Generate Printable Vouchers"
           onClick={() => {
             console.log(keys);
-            onKeySubmission(keys, endpoint, validFrom, validTill, singleQrPerPage);
+            onKeySubmission(keys, endpoint, validFrom, validTill, distEnv, singleQrPerPage);
           }}
         />
       </div>
