@@ -71,6 +71,7 @@ export const Voucher = ({
                 <div
                   className="p-2"
                   css={css`
+                    margin: 3px 0;
                     min-height: 40px;
                     position: relative;
                     overflow: hidden;
