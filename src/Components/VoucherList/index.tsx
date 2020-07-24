@@ -20,7 +20,7 @@ export const VoucherList = (): React.ReactElement => {
     singleQrPerPage = false
   ): void => {
     setKeys(submittedKeys);
-    setEndpoint(submittedEndpoint);
+    setEndpoint(submittedEndpoint.replace(/\/+$/, ""));
     setValidityPeriod({ from: validFrom, till: validTill });
     setSingleQrPerPage(singleQrPerPage);
     setDistEnv(distEnv);
