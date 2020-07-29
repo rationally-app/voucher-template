@@ -22,6 +22,7 @@ export const KeySubmissionForm = ({
     validFrom: string,
     validTill: string,
     distEnv: string,
+    serialNumber: string,
     singleQrPerPage?: boolean
   ) => void;
 }): React.ReactElement => {
@@ -30,6 +31,7 @@ export const KeySubmissionForm = ({
   const [validFrom, setValidFrom] = useState("");
   const [validTill, setValidTill] = useState("");
   const [distEnv, setDistEnv] = useState("");
+  const [serialNumber, setSerialNumber] = useState("");
   const [editableEndpoint, setEditableEndpoint] = useState(true);
   const [editableValidity, setEditableValidity] = useState(true);
   const [keys, setKeys] = useState<string[]>([]);
@@ -122,6 +124,10 @@ export const KeySubmissionForm = ({
           onChange={e => setDistEnv(e.target.value)}
         />
       </div>
+      <div className="mt-3">First Serial Number</div>
+      <div>
+        <input className="p-1" placeholder="1" value={serialNumber} onChange={e => setSerialNumber(e.target.value)} />
+      </div>
       <div className="mt-3">Print Settings</div>
       <div className="mt-1">
         <label className="bp3-control bp3-checkbox bp3-align-left">
@@ -136,7 +142,7 @@ export const KeySubmissionForm = ({
           text="Generate Printable Vouchers"
           onClick={() => {
             console.log(keys);
-            onKeySubmission(keys, endpoint, validFrom, validTill, distEnv, singleQrPerPage);
+            onKeySubmission(keys, endpoint, validFrom, validTill, distEnv, serialNumber, singleQrPerPage);
           }}
         />
       </div>
